@@ -12,7 +12,7 @@ ENV REFRESHED_AT 2016-2-18
 # the container's file system
 ENV AGENT_PACKAGE mongodb-mms-automation-agent-manager_latest_amd64.deb
 
-# Cloud Manager automation
+# MongoDB Cloud Manager automation
 
 # Create a volume for the automation agent to use; run 
 # `docker inspect container_name` on the Docker host to see what directory
