@@ -12,6 +12,14 @@ ENV REFRESHED_AT 2016-2-18
 # the container's file system
 ENV AGENT_PACKAGE mongodb-mms-automation-agent-manager_latest_amd64.deb
 
+# Refreshes the APT package cache within the image (in a layer on top of the 
+# base image) and then installs  "Common CA certificates" and "Cyrus SASL - 
+# authentication abstraction library" packages.
+RUN apt-get -qqy update && \
+    apt-get install -qqy \
+        ca-certificates \
+        libsasl2-2
+
 # MongoDB Cloud Manager automation
 
 # Create a volume for the automation agent to use; run 
