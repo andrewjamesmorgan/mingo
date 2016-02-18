@@ -22,10 +22,10 @@ RUN apt-get -qqy update && \
 
 # MongoDB Cloud Manager automation
 
-# Create a volume for the automation agent to use; run 
+# Create a volume for the automation agent and mongod to use; run 
 # `docker inspect container_name` on the Docker host to see what directory
 # on the host it gets mapped to
-VOLUME /var/lib/docker/mingo/agent:/var/lib/mongodb-mms-automation
+VOLUME ["/var/lib/mongodb-mms-automation", "/data"]
 
 # Copies the automation agent package from the directory from which the
 # image is being developed into the image's /root directory
@@ -33,11 +33,6 @@ ADD ./${AGENT_PACKAGE} /root/
 
 # Install the automation agent package in the image
 RUN dpkg -i /root/${AGENT_PACKAGE}
-
-# Create a volume for the mongod to use; run 
-# `docker inspect container_name` on the Docker host to see what directory
-# on the host it gets mapped to
-VOLUME /var/lib/docker/mingo/data:/data
 
 # Change the owner for that directory within the image
 RUN chown mongodb:mongodb /data
